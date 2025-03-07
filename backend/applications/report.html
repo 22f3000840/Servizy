@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+
+        .container {
+            text-shadow: 10px 10px 10px #000000;
+            background: linear-gradient(to right, #00000088, #ffffff1d);
+            color: rgb(198, 198, 198);
+            padding-bottom: 10px;
+            padding-left: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Monthly Activity Report - {{ month_year }}</h2>
+    <p>Hello {{ customer.username }},</p>
+    <p>Here is your service activity for the month:</p>
+    <h3>Services Requested</h3>
+    <ul>
+        {% for request in requested_services %}
+        <li>{{ request.service.service_name }} - Requested on {{ request.date_created.strftime('%Y-%m-%d') }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Services Closed</h3>
+    <ul>
+        {% for request in closed_services %}
+        <li>{{ request.service.service_name }} - Closed on {{ request.date_closed.strftime('%Y-%m-%d') }}</li>
+        {% endfor %}
+    </ul>
+
+    <p>Thank you for using our services!</p>
+</body>
+</html>
