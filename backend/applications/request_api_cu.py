@@ -3,7 +3,7 @@ from flask_restful import Resource, reqparse, marshal_with,Api
 from applications.models import *
 from flask_jwt_extended import jwt_required,get_jwt_identity,create_access_token,create_refresh_token
 import json
-from .api import cache
+from applications.api import cache
 
 # class RequestApiCu(Resource):
 
@@ -55,6 +55,7 @@ from .api import cache
 class CustomerDashboardAPI(Resource):
 
     @jwt_required()
+    @cache.cached(timeout=5)
     def get(self):
         """Fetch available services and service history for customers"""
         try:
@@ -86,6 +87,7 @@ class CustomerDashboardAPI(Resource):
             ]
 
             return jsonify({
+                'customer_name':current_user.get('username'),
                 'available_services': available_services,
                 'service_history': service_history
             })
@@ -132,6 +134,7 @@ class CreateServiceRequestAPI(Resource):
 class ServiceHistoryAPI(Resource):
 
     @jwt_required()
+    @cache.cached(timeout=5)
     def get(self):
         """Get service history for a customer"""
         try:
@@ -245,6 +248,7 @@ class CloseServiceRequestAPI(Resource):
         
 class ServiceDetailsAPI(Resource):
     @jwt_required()
+    @cache.cached(timeout=5)
     def get(self, service_id):
         service = HouseholdServices.query.get_or_404(service_id)
         professionals = User.query.filter_by(role='service_professional',service_id=service_id).all()
@@ -259,6 +263,7 @@ class ServiceDetailsAPI(Resource):
     
 class FetchServiceRequestAPI(Resource):
     @jwt_required()
+    @cache.cached(timeout=5)
     def get(self, service_request_id):
         """Fetch a specific service request by its ID."""
         try:
@@ -326,6 +331,7 @@ class FetchServiceRequestAPI(Resource):
 
 class CustomerSearchAPI(Resource):
    @jwt_required()
+   @cache.cached(timeout=5)
    def get(self):
         """Search services based on query parameters."""
         try:

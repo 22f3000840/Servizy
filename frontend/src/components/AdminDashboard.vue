@@ -154,9 +154,9 @@
                     <tr v-for="request in requests" :key="request.id">
                       <td>{{ request.id }}</td>
                       <td>
-                        <router-link :to="'/admin_dashboard/view_sp/' + request.service_professional.id">
+                        <!-- <router-link :to="'/admin_dashboard/view_sp/' + request.service_professional.id"> -->
                           {{ request.service_professional.user_name }}
-                        </router-link>
+                        <!-- </router-link> -->
                       </td>
                       <td>{{ request.date_created }}</td>
                       <td>{{ request.status }}</td>

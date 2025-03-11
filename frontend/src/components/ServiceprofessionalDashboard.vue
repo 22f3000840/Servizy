@@ -135,7 +135,7 @@
             },
           });
           const data = await response.json();
-          this.spName = data.sp_name;
+          this.spName = data.sp_username;
           this.pendingRequests = data.pending_requests || [];
           this.acceptedRequests = data.accepted_requests || [];
           this.closedRequests = data.closed_requests || [];

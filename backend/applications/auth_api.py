@@ -4,6 +4,7 @@ from flask_restful import Resource, reqparse, marshal_with,Api
 from applications.models import *
 from flask_jwt_extended import jwt_required,get_jwt_identity,create_access_token,create_refresh_token
 import json
+from applications.api import cache
 
 api=Api()
 
@@ -211,6 +212,7 @@ class ApproveSpApi(Resource):
         return {'message':'service professional approved successfully'},200
     #creating resource api class to view the details of the service professional by admin
     @jwt_required()
+    @cache.cached(timeout=50)
     def get(self,sp_id):
         current_user=json.loads(get_jwt_identity())
         if current_user.get('role')!='admin':

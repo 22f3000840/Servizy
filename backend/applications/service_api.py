@@ -3,7 +3,7 @@ from flask_restful import Resource, reqparse, marshal_with,Api
 from applications.models import *
 from flask_jwt_extended import jwt_required,get_jwt_identity,create_access_token,create_refresh_token
 import json
-from .api import cache
+from applications.api import cache
 
 class ServiceApi(Resource):
 #     # @jwt_required()
@@ -16,6 +16,7 @@ class ServiceApi(Resource):
 #             # service_json.append(service_dict)
 #             service_json.append(service.convert_to_json())
 #         return service_json,200
+    @cache.cached(timeout=5)
     def get(self, service_id=None):
         if service_id:
             # Fetch a specific service by ID

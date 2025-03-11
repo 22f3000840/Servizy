@@ -86,6 +86,7 @@ class HouseholdServiceRequest(db.Model):
     def convert_to_json(self):
         return {
             "id":self.id,
+            "sp_username":self.service_professional.username if self.service_professional else None,
             "service_id":self.service_id,
             "customer_id":self.customer_id,
             "service_professional_id":self.service_professional_id,

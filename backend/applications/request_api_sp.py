@@ -3,10 +3,12 @@ from flask_restful import Resource, reqparse, marshal_with,Api
 from applications.models import *
 from flask_jwt_extended import jwt_required,get_jwt_identity,create_access_token,create_refresh_token
 import json
+from applications.api import cache
 
 
 class RequestApiSp(Resource):
     @jwt_required()
+    @cache.cached(timeout=5)
     def get(self):
         current_user = json.loads(get_jwt_identity())
         print("JWT Payload:", current_user)  
@@ -27,6 +29,7 @@ class RequestApiSp(Resource):
         closed_requests = HouseholdServiceRequest.query.filter_by(service_professional_id=sp.id, status='closed').all()
 
         return {
+            'sp_username':current_user.get('username'),
             'pending_requests': [r.convert_to_json() for r in pending_requests],
             'accepted_requests': [r.convert_to_json() for r in accepted_requests],
             'closed_requests': [r.convert_to_json() for r in closed_requests]

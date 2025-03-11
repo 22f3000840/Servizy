@@ -5,9 +5,11 @@ from applications.models import *
 from applications.tasks import export_service_requests
 from sqlalchemy.exc import SQLAlchemyError
 import json
+from applications.api import cache
 
 class ServiceRequestAPI(Resource):
     @jwt_required()
+    @cache.cached(timeout=5)
     def get(self):
         """Fetch all service requests"""
         try:
