@@ -19,8 +19,6 @@ class User(db.Model):
     last_seen=db.Column(db.DateTime, nullable=True, default=datetime.now())
     avg_rating=db.Column(db.Float, default=0.0)
     rating_count=db.Column(db.Integer, default=0)
-    # sp_file=db.Column(db.String(80), nullable=True)
-    # sp_experience=db.Column(db.String(80), nullable=True)
     service_id=db.Column(db.Integer, db.ForeignKey('householdServices.id',ondelete='SET NULL'), nullable=True)
     service=db.relationship('HouseholdServices',back_populates='service_professionals')
     customer_requests=db.relationship('HouseholdServiceRequest',back_populates='customer',foreign_keys='HouseholdServiceRequest.customer_id')

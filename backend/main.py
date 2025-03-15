@@ -56,11 +56,11 @@ def create_admin():
         print("admin created")
 
 
-@app.route('/test_cache')
-@cache.cached(timeout=10)
-def test_cache():
-    time.sleep(10)
-    return "testing is working"
+# @app.route('/test_cache')
+# @cache.cached(timeout=10)
+# def test_cache():
+#     time.sleep(10)
+#     return "testing is working"
 
 
 api.add_resource(AuthApi,'/api/login','/api/sp','/api/sp/<int:sp_id>')

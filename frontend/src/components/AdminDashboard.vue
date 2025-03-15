@@ -37,53 +37,6 @@
                   </div>
                 </div>
               </nav>
-              <!-- Search Section -->
-    <div class="container mt-5">
-      <h2 class="section-title">Search Users</h2>
-      <div class="input-group mb-3">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Search by username"
-          v-model="searchQuery"
-          @keyup.enter="searchUsers"
-        />
-        <button class="btn btn-primary" @click="searchUsers">Search</button>
-      </div>
-
-      <!-- Search Results -->
-      <table v-if="searchResults.length" class="table table-hover table-striped shadow-sm">
-        <thead class="table-dark">
-          <tr>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Average Rating</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="user in searchResults" :key="user.id">
-            <td>{{ user.username }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.role }}</td>
-            <td>{{ user.avg_rating}}</td>
-            <td>{{ user.is_flagged ? "Blocked" : "Active" }}</td>
-            <td>
-              <button
-                class="btn btn-sm"
-                :class="user.is_flagged ? 'btn-success' : 'btn-danger'"
-                @click="toggleBlockUser(user.id)"
-              >
-                {{ user.is_flagged ? "Unblock" : "Block" }}
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <p v-else class="text-center text-muted">No users found.</p>
-    </div>
           
               <!-- Services Section -->
               <div class="container mt-5">
@@ -154,9 +107,9 @@
                     <tr v-for="request in requests" :key="request.id">
                       <td>{{ request.id }}</td>
                       <td>
-                        <!-- <router-link :to="'/admin_dashboard/view_sp/' + request.service_professional.id"> -->
+                        
                           {{ request.service_professional.user_name }}
-                        <!-- </router-link> -->
+                        
                       </td>
                       <td>{{ request.date_created }}</td>
                       <td>{{ request.status }}</td>

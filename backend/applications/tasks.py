@@ -164,8 +164,8 @@ def send_email_with_csv(to, subject, message, csv_data, csv_filename):
 #to test only
 @celery.on_after_finalize.connect 
 def setup_periodic_tasks(sender, **kwargs):
-    sender.add_periodic_task(10, send_daily_reminder.s(), name='Daily_Reminder') 
-    sender.add_periodic_task(10, send_monthly_activity_report.s(), name='Monthly_Report')
+    sender.add_periodic_task(60, send_daily_reminder.s(), name='Daily_Reminder') 
+    sender.add_periodic_task(60, send_monthly_activity_report.s(), name='Monthly_Report')
 
 
 from celery.schedules import crontab

@@ -210,7 +210,7 @@
         if (index !== -1) {
           const closedRequest = this.acceptedRequests[index];
           closedRequest.status = "closed";
-          closedRequest.date_closed = new Date().toISOString(); // Set closed date
+          closedRequest.date_closed = new Date().toISOString().split('T')[0]; // Set closed date
           closedRequest.closed_by = result.closed_by; // Store who closed it
 
           this.closedRequests.push(closedRequest);
