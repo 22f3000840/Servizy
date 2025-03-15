@@ -26,7 +26,7 @@ export default {
     <div class="d-flex align-items-center justify-content-center vh-100 bg-light">
       <div class="card shadow-lg p-4 rounded-lg text-center" style="max-width: 450px;">
         <div class="card-header bg-primary text-white fw-bold fs-4">
-          Welcome to Household Servicing App
+          Welcome to Household Servicing App(Servizy App)
         </div>
         <div class="card-body">
           <h5 class="card-title mb-4">Select Your Role</h5>
